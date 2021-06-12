@@ -1,68 +1,76 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 const CastInfo = (props) => {
-    return (
-      <div className="cast-info">
-        <div className="cast-info__group-title">
-            Cast & Crew
-        </div>
-        <div className="cast-info__list">
-            <ul className="cast-info__crew">
-                <li>
-                    Director
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-            <ul className="cast-info__crew">
-                <li>
-                    Actor
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-            <div className="cast-info__group-title">
-                Director
-            </div>
-            <ul className="cast-info__crew">
-                <li>
-                    Camera Man
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-            <ul className="cast-info__crew">
-                <li>
-                    Writer
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-            <div className="cast-info__group-title">
-                Support
-            </div>
-            <ul className="cast-info__crew">
-                <li>
-                    Audio
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-            <ul className="cast-info__crew">
-                <li>
-                    Special FX
-                </li>
-                <li>
-                    George Lucas
-                </li>
-            </ul>
-        </div>
-      </div>
-    );
-  };
-  
-  export default CastInfo;
-  
+  const [loadingData, setLoadingData] = useState(true);
+  const [credits, setCredits] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/${props.mediaType === 'movie' ? 'movie' : 'tv'}/${props.mediaId}/credits?api_key=7e25105542df9cfb7f39489fe9aa8978&language=en-US`
+      )
+      .then(function (response) {
+        setCredits(response.data);
+        setLoadingData(false);
+        // handle success
+        console.log("Success Response For cast and crew ");
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log("Error Response For cast and crew");
+        console.log(error);
+      });
+  }, []);
+
+  const showCast = () => {
+    if(loadingData !== true){
+      return credits.cast.map((item, index) => {
+        return(
+          <ul className="cast-info__crew" key={index}>
+            <li>
+              {item.character}
+            </li>
+            <li>
+              {item.name}
+            </li>
+          </ul>
+        )
+      })
+    } else {
+      return(<div>Loading Cast</div>)
+    }
+  }
+
+
+  const showCrew = () => {
+    if(loadingData !== true){
+      return credits.crew.map((item, index) => {
+        return(
+          <ul className="cast-info__crew" key={index}>
+            <li>
+              {item.job}
+            </li>
+            <li>
+              {item.name}
+            </li>
+          </ul>
+        )
+      })
+    } else {
+      return(<div>Loading Crew</div>)
+    }
+  }
+
+  return (
+    <div className="cast-info">
+      <div className="cast-info__group-title">Cast</div>
+      <div className="cast-info__list">{showCast()}</div>
+      <div className="cast-info__group-title">Crew</div>
+      {showCrew()}
+    </div>
+  );
+};
+
+export default CastInfo;

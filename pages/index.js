@@ -17,71 +17,78 @@ export default function Home() {
 
   return AuthCheck(
     <MainLayout>
-      <FeaturedMedia />
+      <FeaturedMedia
+        mediaUrl="https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16"
+        title="Mortal Kombat"
+        location="In Theaters & HBO Max. Streaming throughout May 31."
+        linkUrl="/movie/460465"
+        type="front"
+      />
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Movies" type="large-v" />}
       > */}
-        <MediaRow
-          title="Movies"
-          type="large-v"
-          endpoint="discover/movie?sort_by=popularity.desc&primary_release_year=2021"
-        />
+      <MediaRow
+        title="Movies"
+        type="large-v"
+        endpoint="discover/movie?sort_by=popularity.desc&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
 
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Series" type="small-h" />}
       > */}
-        <MediaRow
-          title="Series"
-          type="small-h"
-          endpoint="discover/tv?sort_by=popularity.desc&primary_release_year=2021"
-        />
+      <MediaRow
+        title="Series"
+        mediaType="series"
+        type="small-h"
+        endpoint="discover/tv?sort_by=popularity.desc&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
 
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Action" type="small-v" />}
       > */}
-        <MediaRow
-          title="Action"
-          type="small-v"
-          endpoint="discover/movie?with_genres=28&primary_release_year=2021"
-        />
+      <MediaRow
+        title="Action"
+        type="small-v"
+        endpoint="discover/movie?with_genres=28&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
 
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Horror" type="small-v" />}
       > */}
-        <MediaRow
-          title="Horror"
-          type="small-v"
-          endpoint="discover/movie?with_genres=27&primary_release_year=2021"
-        />
+      <MediaRow
+        title="Horror"
+        type="small-v"
+        endpoint="discover/movie?with_genres=27&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
 
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="Animations" type="large-h" />}
       > */}
-        <MediaRow
-          title="Animations"
-          type="large-h"
-          endpoint="discover/movie?with_genres=16&primary_release_year=2021"
-        />
+      <MediaRow
+        title="Animations"
+        type="large-h"
+        endpoint="discover/movie?with_genres=16&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
 
       {/* <LazyLoad
         offset={-400}
         placeholder={<Placeholders title="SciFi" type="small-v" />}
       > */}
-        <MediaRow
-          title="SciFi"
-          type="small-v"
-          endpoint="discover/movie?with_genres=878&primary_release_year=2021"
-        />
+      <MediaRow
+        title="SciFi"
+        type="small-v"
+        endpoint="discover/movie?with_genres=878&primary_release_year=2021"
+      />
       {/* </LazyLoad> */}
     </MainLayout>
   );
